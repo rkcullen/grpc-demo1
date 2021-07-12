@@ -4,7 +4,7 @@ from client_wrapper import ServiceClient
 
 
 def run():
-    anomalies = ServiceClient(anomalies_service, 'AnomaliesStub', 'localhost', 50051)
+    anomalies = ServiceClient(anomalies_service, 'AnomalyDetectionStub', 'localhost', 50051)
     # Insert example metadata
     metadata = [('ip', '127.0.0.1')]
     with open('test_data_1.csv', "r") as f:
