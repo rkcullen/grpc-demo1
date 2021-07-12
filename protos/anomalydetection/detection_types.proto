@@ -1,0 +1,17 @@
+syntax = "proto3";
+package anomalydetection;
+
+message Request {
+  string raw_json = 1;
+  string only_last = 2;
+  bool resampling = 3; 
+}
+
+message Response {
+  KeyValuePair keypair = 1;
+}
+
+message KeyValuePair {
+  string timestamp = 1;
+  float value = 2;
+}
