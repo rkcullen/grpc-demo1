@@ -2,5 +2,5 @@ syntax = "proto3";
 import "detection_types.proto";
 
 service AnomalyDetection {
-  rpc TwitterAnomalies (anomalydetection.Request) returns (stream anomalydetection.Response) {}
+  rpc TwitterAnomalies (stream anomalydetection.Request) returns (stream anomalydetection.Response) {}
 }
