@@ -1,0 +1,16 @@
+FROM python:3 AS build
+
+RUN python -m pip install --upgrade pip
+RUN python -m pip install grpcio-tools
+RUN python -m pip install tad
+
+ADD protos /protos
+WORKDIR /protos
+RUN ./build.sh
+
+WORKDIR /
+ADD grpc-services/anomalydetection/server /service
+RUN cp -r /protos/gen-py/* /service
+WORKDIR /service/
+EXPOSE 50051
+ENTRYPOINT [ "python", "server.py" ]

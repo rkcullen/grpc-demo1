@@ -1,0 +1,17 @@
+FROM python:3 AS build
+
+RUN python -m pip install --upgrade pip
+RUN python -m pip install grpcio-tools
+RUN python -m pip install pandas 
+
+ADD protos /protos
+WORKDIR /protos
+RUN ./build.sh
+
+WORKDIR /
+ADD grpc-services/anomalydetection/ /service
+RUN cp /protos/gen-py/* /service
+COPY grpc-services/client_wrapper.py /service/
+WORKDIR /service/
+
+ENTRYPOINT [ "python", "client.py" ]
